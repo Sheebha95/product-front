@@ -6,39 +6,36 @@ import axios from "axios";
 
 
 const App = async (product) => {
-  try{ 
-  const response = await axios.post("https://localhost:5000/product", product);
-  console.log("response", response.data);
-  setProducts(response.data);
-} catch (error){
-      console.log(error);
-}
+  
   const [products, setProducts] = useState([]);
   const [showProduct, setShowProduct] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
   useEffect(() => {
-    fetchProduct();
-    // Fetch todos from API
-    // setTodos([
-    //   { id: 1, title: "Todo 1", description: "Description 1" },
-    //   { id: 2, title: "Todo 2", description: "Description 2" },
-    //   { id: 3, title: "Todo 3", description: "Description 3" },
-    // ]);
-  }, []);
+    fetchProduct(); 
+    }, []);
 
   const fetchProduct = async () => {
     try {
-    const response = await axios.get("http://localhost:5000/products", product);
+    const response = await axios.get("http://localhost:5000/products");
     console.log("Response", response.data);
-    setProducts(response.data);
+    //setProducts(response.data);
   } catch (error){
     console.log(error);
   }
 };
 
-  const handleAddProduct = (product) => {
-    setProducts([...products, product]);
+  const handleAddProduct = async (product) => {
+    console.log("NewPeoduct", product);
+    try{ 
+      const response = await axios.post("https://localhost:5000/product", product);
+      console.log("response", response.data);
+      //setProducts(response.data);
+      setProducts([...products, product]);
+    } catch (error){
+          console.log(error);
+    }
+    
   };
 
   const handleEditProduct = (product) => {

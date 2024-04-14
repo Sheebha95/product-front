@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 
 const ProductForm = ({ onSubmit, product }) => {
-  const [modelName, setModelName] = useState(product ? product.modelName : "");
-  const [brand, setBrand] = useState(product ? product.brand : "");
-  const [screenSize, setScreenSize] = useState(product ? product.screenSize : "");
-  const [display, setDisplay] = useState(product ? product.display : "");
-  const [resolution, setResolution] = useState(product ? product.resolution : "");
+  const [modelName, setModelName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [screenSize, setScreenSize] = useState("");
+  const [display, setDisplay] = useState("");
+  const [resolution, setResolution] = useState("");
+
+  
 
   useEffect(() => {
     if (product) {
@@ -18,6 +20,7 @@ const ProductForm = ({ onSubmit, product }) => {
     }
   }, [product]);
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ modelName, brand, screenSize, display, resolution });
